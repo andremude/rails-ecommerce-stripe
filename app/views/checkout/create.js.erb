@@ -1,0 +1,6 @@
+const stripe = Stripe(ENV["STRIPE_PUBLIC_KEY"]);
+
+  stripe.redirectToCheckout({
+    sessionId: '<%= @session_id %>'
+  }).then(function (result) {
+  });
