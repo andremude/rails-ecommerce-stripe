@@ -1,3 +1,5 @@
 require 'stripe'
 
-Stripe.api_key = Rails.application.credentials[:stripe][:secret]
+if Rails.application.credentials[:stripe]
+  Stripe.api_key = Rails.application.credentials[:stripe][:secret]
+end
