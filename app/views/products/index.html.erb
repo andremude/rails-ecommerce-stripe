@@ -21,21 +21,13 @@
       <tr>
         <td><%= product.name %></td>
         <td><%#= product.currency %></td>
-        <td><%#= product.price_cents %></td>
-        <td><%#= product.stripe_product_id %></td>
+        <td>$<%= product.price/100 %></td>
+        <td><%= product.stripe_product_id %></td>
         <td><%#= product.stripe_price_id %></td>
-        <td><%#= Stripe::Price.retrieve(product.stripe_price_id)&.currency %></td>
-        <td><%#= Stripe::Price.retrieve(product.stripe_price_id)&.unit_amount/100 %></td>
-        <td>
-          <%# if @cart.include?(product) %>
-            <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-          <%# else %>
-            <%#= button_to "Add to cart", add_to_cart_path(product) %>
-          <%# end %>
-        </td>
-        <td><%#= product.sales_count %></td>
-        <td><%#= link_to 'Show', product %></td>
-        <td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= product.sales_count %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Buy now!', checkout_create_path, params: {id: product.id}, remote: true %></td>
       </tr>
     <% end %>
   </tbody>
