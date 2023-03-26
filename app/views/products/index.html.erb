@@ -27,7 +27,7 @@
         <td><%= product.sales_count %></td>
         <td><%= link_to 'Edit', edit_product_path(product) %></td>
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= button_to 'Buy now!', checkout_create_path, params: {id: product.id}, remote: true %></td>
+        <td><%= button_to 'Buy now!', checkout_create_path, params: {id: product.id}, remote: true, data: { disable_with: "validating..."} %></td>
       </tr>
     <% end %>
   </tbody>
