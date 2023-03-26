@@ -1,0 +1,16 @@
+<h1>Success URL</h1>
+<% if params[:session_id].present? %>
+  <% @session = Stripe::Checkout::Session.retrieve(params[:session_id]) %>
+  <%= @session.payment_intent %>
+  <%= Stripe::PaymentIntent.retrieve(@session.payment_intent) %>
+  <hr>
+  <% @session_with_expand = Stripe::Checkout::Session.retrieve({
+    id: params[:session_id],
+    expand: ["payment_intent", "line_items"]
+  }) %>
+
+  <%= @session_with_expand.line_items.data.each do |line_item| %>
+    <%= line_item.price.id %>
+    <%= line_item.price.product %>
+  <% end %>
+<% end %>
