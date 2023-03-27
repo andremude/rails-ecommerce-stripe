@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary d-flex flex-column">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar w/ text</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,15 +10,63 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <%= link_to "Products", products_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
       </ul>
       <span class="navbar-text">
-        Navbar text with an inline element
+        <% if current_user %>
+          <%= link_to current_user.email %> |
+          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+          <%#= link_to current_user.stripe_customer_id %>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path %> |
+          <%= link_to "Register", new_user_registration_path %>
+        <% end %>
       </span>
+    </div>
+  </div>
+  <hr>
+  <div class="center-navbar">
+    <div class="nav-search-bar">
+      <%= form_tag products_path, method: :get do %>
+        <div class="search-bar-form">
+          <%= text_field_tag :query,
+          params[:query],
+          placeholder: "I'm looking for...",
+          class: "search-bar-input"
+          %>
+          <%= submit_tag "Search", class: "search-bar-btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="cart-container">
+      <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+      <div class="cart-circle-container">
+        <div class="cart-circle-number">
+            <%= @cart.size %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="bottom-navbar">
+    <div class="bottom-nav-item">
+      <div>NEW ARRIVALS</div>
+    </div>
+    <div class="bottom-nav-item">
+      <div>MEN</div>
+    </div>
+    <div class="bottom-nav-item">
+      <div>WOMEN</div>
+    </div>
+    <div class="bottom-nav-item">
+      <div>KIDS</div>
+    </div>
+    <div class="bottom-nav-item">
+      <div>SALE</div>
     </div>
   </div>
 </nav>
