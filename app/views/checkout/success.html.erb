@@ -1,4 +1,9 @@
 <h1>Success URL</h1>
+  <% @session_with_expand.line_items.data.each do |line_item| %>
+    <% product = Product.find_by(stripe_product_id: line_item.price.product) %>
+    <br>
+    <%= product.name %>
+  <% end %>
 
 <p>Checkout status: <%= @session_with_expand.payment_status %></p>
 <p>Amount paid: $<%= @session_with_expand.amount_total/100 %></p>
@@ -10,3 +15,4 @@
     <%= line_item.price.id %>
     <%= line_item.price.product %>
   <% end %>
+<br>
