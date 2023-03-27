@@ -21,6 +21,20 @@
       <%= link_to "Register", new_user_registration_path %>
     <% end %>
     <hr>
+    <h1>Shopping cart</h1>
+    <%= @cart.each do |product| %>
+      <%= product.name %>
+      $<%= product.price/100  %>
+    <% end %>
+    Items:
+    <%= @cart.size %>
+    <br>
+    <% @cart.each do |cart_item| %>
+      <br>
+      <%= cart_item.name %>
+      <%= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
+    <% end %>
+    <hr>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

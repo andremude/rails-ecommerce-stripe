@@ -8,7 +8,7 @@
       <th>Price</th>
       <th>Stripe Product Id</th>
       <th>Stripe Price Id</th>
-      <th>Stripe Currency</th>
+      <th>Shopping Cart</th>
       <th>Stripe Price</th>
       <th>Shopping cart</th>
       <th>Sales count</th>
@@ -20,7 +20,13 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
-        <td><%#= product.currency %></td>
+        <td>
+          <% if @cart.include?(product) %>
+            <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
+          <% else %>
+            <%= button_to "Add to cart", add_to_cart_path(product) %>
+          <% end %>
+        </td>
         <td>$<%= product.price/100 %></td>
         <td><%= product.stripe_product_id %></td>
         <td><%= product.stripe_price_id %></td>
