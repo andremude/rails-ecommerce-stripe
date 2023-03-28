@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "Products", products_path, class: "nav-link" %>
@@ -42,7 +42,7 @@
         </div>
       <% end %>
     </div>
-    <div class="cart-container">
+    <div class="cart-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-cart-shopping fa-2xl"></i>
       <div class="cart-circle-container">
         <div class="cart-circle-number">
@@ -50,23 +50,53 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Shopping Cart
+              <i class= 'fa-solid fa-cart-shopping fa-lg'></i>
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <span>Items:</span>
+              <%= @cart.size %>
+              <% @cart.each do |cart_item| %>
+                <%= cart_item.name %>
+                <%= cart_item.price/100 %>
+                <%= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
+              <% end %>
+              <% if @cart.present?  %>
+                <%= @cart.collect { |item| item.to_builder.attributes! } %>
+                <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."} %>
+              <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <hr>
   <div class="bottom-navbar">
     <div class="bottom-nav-item">
-      <div>NEW ARRIVALS</div>
+      <a>NEW ARRIVALS</a>
     </div>
     <div class="bottom-nav-item">
-      <div>MEN</div>
+      <a>MEN</a>
     </div>
     <div class="bottom-nav-item">
-      <div>WOMEN</div>
+      <a>WOMEN</a>
     </div>
     <div class="bottom-nav-item">
-      <div>KIDS</div>
+      <a>KIDS</a>
     </div>
     <div class="bottom-nav-item">
-      <div>SALE</div>
+      <a>SALE</a>
     </div>
   </div>
 </nav>

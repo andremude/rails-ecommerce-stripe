@@ -1,3 +1,9 @@
+.navbar {
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  border-bottom: solid 1px grey;
+}
+
 .center-navbar {
   width: 100%;
   display: flex;
@@ -54,6 +60,15 @@
   padding: 5px 10px;
   text-align: center;
   border-right: solid 2px grey;
+  font-weight: bold;
+}
+
+.bottom-nav-item a {
+  cursor: pointer;
+}
+
+.bottom-nav-item:hover {
+  color: #024983;
 }
 
 .bottom-nav-item:nth-child(n+5) {
