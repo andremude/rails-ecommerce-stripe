@@ -14,24 +14,24 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <hr>
-    <h1>Shopping cart</h1>
-    Items:
-    <%= @cart.size %>
-    <br>
-    <% @cart.each do |cart_item| %>
-      <br>
-      <%= cart_item.name %>
-      $<%= cart_item.price/100 %>
-      <%= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
-    <% end %>
-     <% if @cart.present?  %>
-       <%= @cart.collect { |item| item.to_builder.attributes! } %>
-       <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."} %>
-     <% end %>
-    <hr>
+    <%# <hr> %>
+    <%# <h1>Shopping cart</h1>
+    Items: %>
+    <%#= @cart.size %>
+    <%# <br> %>
+    <%# @cart.each do |cart_item| %>
+      <%# <br> %>
+      <%#= cart_item.name %>
+      <%#= cart_item.price/100 %>
+      <%#= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
+    <%# end %>
+     <%# if @cart.present?  %>
+       <%#= @cart.collect { |item| item.to_builder.attributes! } %>
+       <%#= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."} %>
+     <%# end %>
+    <%# <hr> %>
+    <%= yield %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
   </body>
 </html>
