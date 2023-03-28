@@ -59,3 +59,45 @@
   color: white;
   font-size: large;
 }
+
+.home-cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card {
+  height: 600px;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card a {
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+#newArrivalsCard {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('newArrivals.jpg');
+  background-position: 35%;
+}
+
+#menCard {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("men.jpg")
+}
+
+#womenCard{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("women.jpg")
+}
+
+#kidsCard{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("kids.jpg");
+  background-position: 55%;
+}
