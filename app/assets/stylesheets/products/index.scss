@@ -1,0 +1,21 @@
+.index-products-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  align-items: center;
+  justify-items: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.index-product-img {
+  height: 200px;
+  width: 200px;
+}
