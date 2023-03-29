@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex flex-column">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar w/ text</a>
+    <strong>
+      <%= link_to "ATHLETE.", root_path, class: "navbar-brand" %>
+    </strong>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -51,6 +53,7 @@
         </div>
       </div>
     </div>
+<%# <------------------------CART MODAL ------------------------> %>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -64,19 +67,33 @@
           <div class="modal-body">
             <span>Items:</span>
               <%= @cart.size %>
+              <% total_price = 0 %>
               <% @cart.each do |cart_item| %>
-                <%= cart_item.name %>
-                <%= cart_item.price/100 %>
-                <%= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
+                <hr>
+                <div class="cart-product-card">
+                  <img src="assets/1.jpg" alt="shoe" class="cart-product-img">
+                  <div class="cart-product-card-row">
+                    <div class="cart-product-card-text">
+                      <span><%= cart_item.name %></span>
+                      <span>$<%= cart_item.price/100 -%></span>
+                    </div>
+                    <%= link_to "<i class='fa-regular fa-circle-xmark fa-lg'></i>".html_safe, remove_from_cart_path(cart_item), method: :delete %>
+                  </div>
+                </div>
+                <br>
+                <% total_price += cart_item.price %>
               <% end %>
+              <hr>
+              <strong>
+                <span class="cart-total-price">TOTAL PRICE: $<%= total_price/100 -%></span>
+              </strong>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <% if @cart.present? %>
-                <%= @cart.collect { |item| item.to_builder.attributes! } %>
+                <% @cart.collect { |item| item.to_builder.attributes! } %>
                 <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."}, class:"btn btn-primary" %>
               <% end %>
-            <%# <button type="button" class="btn btn-primary">Save changes</button> %>
           </div>
         </div>
       </div>
