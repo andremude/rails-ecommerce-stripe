@@ -42,6 +42,7 @@
         </div>
       <% end %>
     </div>
+<%# <--------------------------CART-------------------------------> %>
     <div class="cart-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-cart-shopping fa-2xl"></i>
       <div class="cart-circle-container">
@@ -68,20 +69,21 @@
                 <%= cart_item.price/100 %>
                 <%= link_to "x", remove_from_cart_path(cart_item), method: :delete %>
               <% end %>
-              <% if @cart.present?  %>
-                <%= @cart.collect { |item| item.to_builder.attributes! } %>
-                <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."} %>
-              <% end %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+              <% if @cart.present? %>
+                <%= @cart.collect { |item| item.to_builder.attributes! } %>
+                <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."}, class:"btn btn-primary" %>
+              <% end %>
+            <%# <button type="button" class="btn btn-primary">Save changes</button> %>
           </div>
         </div>
       </div>
     </div>
   </div>
   <hr>
+<%# <----------------------BOTTOM NAVBAR---------------------------> %>
   <div class="bottom-navbar">
     <div class="bottom-nav-item">
       <a>NEW ARRIVALS</a>
