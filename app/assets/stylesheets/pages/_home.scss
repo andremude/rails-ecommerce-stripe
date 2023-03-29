@@ -26,12 +26,17 @@
   flex-direction: column;
   position: relative;
   bottom: 60px;
-  right: 220px;
+  right: 180px;
 }
 
 .hero-left-container p {
   color: white;
   font-size: large;
+}
+
+#promoCode {
+  border: solid 1px white;
+  padding: 5px 10px;
 }
 
 .hero-right-container {
