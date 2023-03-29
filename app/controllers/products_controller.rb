@@ -2,6 +2,15 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    sort_by = params[:sort_by]
+    case sort_by
+    when 'price_low_to_high'
+      @products = Product.order(price: :asc)
+    when 'price_high_to_low'
+      @products = Product.order(price: :desc)
+    else # Newest by default
+      @products = Product.order(created_at: :desc)
+    end
   end
 
   def show
