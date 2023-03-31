@@ -1,0 +1,73 @@
+.signin-form {
+  margin: 20px auto;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+
+.signin-form h2 {
+  text-align: center;
+  margin: 15px;
+}
+
+.form-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15px;
+  font-size: 1.20rem;
+}
+
+#signinBtn {
+  background-color: #024983;
+  width: 150px;
+  padding: 8px 2px;
+  border-radius: 15px;
+  border: 1px solid white;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+}
+
+#signinBtn:hover {
+  font-weight: bold;
+}
+
+.form-actions-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 2px;
+  font-size: 1.25rem;
+}
+
+.form-inputs input {
+  height: 50px;
+  border-radius: 10px;
+  background-color: white;
+  padding-left: 10px;
+  border: 1px solid black;
+}
+
+.rememberable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.15rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+.rememberable input {
+  margin-right: 5px;
+}
+
+.recover-password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recover-password a {
+  font-family: 'Oswald', sans-serif;
+}

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="container py-5 h-100 signup-form">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <h2>SIGN UP</h2>
+        <p class="text-white-50 text-center">Please enter an email and password</p>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email", :style=> 'width: 300px'},
+                          label: false,
+                          placeholder: "Email",
+                          class: 'signup-input' %>
+              <br>
+              <%= f.input :password,
+                          required: true,
+                          input_html: { autocomplete: "current-password", :style=> 'width: 300px'},
+                          label: false,
+                          placeholder: "Password",
+                          class: "form-input",
+                          class: 'signup-input' %>
+              <br>
+              <%= f.input :password_confirmation,
+                          required: true,
+                          label: false,
+                          placeholder: "Confirm Password",
+                          input_html: {:style=> 'width: 300px'},
+                          class: "form-input",
+                          class: 'signup-input'%>
+              <br>
+            </div>
+            <%# <div class="rememberable"> %>
+              <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            <%# </div> %>
+            <div class="form-actions-btn">
+              <%= f.button :submit, "Sign Up", id: "signupBtn" %>
+            </div>
+            <p class="text-center">Already have an account? <%= link_to "Log In", new_user_session_path , class: "link-info" %></p>
+
+          <% end %>
+        </div>
+      </div>
+
+      <br>
+    </div>
+  </div>
+</div>

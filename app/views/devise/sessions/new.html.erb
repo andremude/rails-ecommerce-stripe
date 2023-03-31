@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="container py-5 h-100 signin-form">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <h2>LOG IN</h2>
+        <p class="text-white-50 text-center">Please enter an email and password</p>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email", :style=> 'width: 300px'},
+                          label: false,
+                          placeholder: "Email",
+                          class: 'signin-input' %>
+              <br>
+              <%= f.input :password,
+                          required: true,
+                          input_html: { autocomplete: "current-password", :style=> 'width: 300px'},
+                          label: false,
+                          placeholder: "Password",
+                          class: "form-input",
+                          class: 'signin-input' %>
+              <br>
+            </div>
+            <div class="rememberable">
+              <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              <%= f.label :remember_me %>
+            </div>
+
+            <div class="form-actions-btn">
+              <%= f.button :submit, "Log In", id:"signinBtn" %>
+            </div>
+            <div class="recover-password">
+              <%= link_to "Forgot your password?", new_user_password_path , class: "link-info" %>
+            </div>
+            <p class="text-center">Don't have an account? <%= link_to "Register here", new_user_registration_path , class: "link-info" %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <br>
+    </div>
+  </div>
+</div>
