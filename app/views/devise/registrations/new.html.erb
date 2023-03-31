@@ -5,7 +5,7 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
         <h2>SIGN UP</h2>
         <p class="text-white-50 text-center">Please enter an email and password</p>
-          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
             <div class="form-inputs">
               <%= f.input :email,
                           required: true,
@@ -20,7 +20,6 @@
                           input_html: { autocomplete: "current-password", :style=> 'width: 300px'},
                           label: false,
                           placeholder: "Password",
-                          class: "form-input",
                           class: 'signup-input' %>
               <br>
               <%= f.input :password_confirmation,
@@ -28,13 +27,9 @@
                           label: false,
                           placeholder: "Confirm Password",
                           input_html: {:style=> 'width: 300px'},
-                          class: "form-input",
                           class: 'signup-input'%>
               <br>
             </div>
-            <%# <div class="rememberable"> %>
-              <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-            <%# </div> %>
             <div class="form-actions-btn">
               <%= f.button :submit, "Sign Up", id: "signupBtn" %>
             </div>
