@@ -87,6 +87,14 @@
   color: white;
   font-weight: bold;
   font-size: x-large;
+  border: 1px solid white;
+  text-decoration: none;
+  padding: 0px 8px;
+}
+
+.home-card a:hover {
+  background-color: white;
+  color: black;
 }
 
 #newArrivalsCard {
