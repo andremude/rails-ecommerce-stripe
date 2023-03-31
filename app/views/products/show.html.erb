@@ -6,21 +6,17 @@
   <div class="show-right-container">
     <div>
       <h2><%= @product.name %></h2>
-      <strong><p>$<%= @product.price_cents %></p></strong>
-      <p><%#= @product.stripe_product_id %></p>
-      <p><%#= @product.stripe_price_id %></p>
+      <div class="product-price-genre">
+        <strong><p>$<%= @product.price_cents %></p></strong>
+        <p><%= @product.genre %></p>
+      </div>
       <div>
         <span>COLORS:</span>
         <br>
         <img src="/assets/1.jpg" alt="shoe" class="show-product-color-img">
       </div>
-      <%# if @cart.include?(product) %>
-        <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-      <%# else %>
-        <%#= button_to "Add to cart", add_to_cart_path(product) %>
-      <%# end %>
     </div>
-    <%# <div class="sizes-table"> %>
+    <br>
     <span>SELECT A SIZE:</span>
       <table class="sizes-table">
         <tr>
@@ -43,6 +39,7 @@
           <td>12.5</td>
         </tr>
       </table>
+      <br>
       <div>
         <span>QUANTITY:</span>
         <select name="select">
@@ -58,14 +55,46 @@
           <option value="10">10</option>
         </select>
       </div>
+      <br>
+<%= form_tag add_to_cart_path(@product, size: params[:size]), method: :post do %>
+  <span>SELECT A SIZE:</span>
+  <table class="sizes-table">
+    <tr>
+      <td><%= radio_button_tag :size, '6.5' %><label>6.5</label></td>
+      <td><%= radio_button_tag :size, '7' %><label>7</label></td>
+      <td><%= radio_button_tag :size, '7.5' %><label>7.5</label></td>
+      <td><%= radio_button_tag :size, '8' %><label>8</label></td>
+      <td><%= radio_button_tag :size, '8.5' %><label>8.5</label></td>
+    </tr>
+    <tr>
+      <td><%= radio_button_tag :size, '9' %><label>9</label></td>
+      <td><%= radio_button_tag :size, '9.5' %><label>9.5</label></td>
+      <td><%= radio_button_tag :size, '10' %><label>10</label></td>
+      <td><%= radio_button_tag :size, '10.5' %><label>10.5</label></td>
+      <td><%= radio_button_tag :size, '11' %><label>11</label></td>
+    </tr>
+    <tr>
+      <td><%= radio_button_tag :size, '11.5' %><label>11.5</label></td>
+      <td><%= radio_button_tag :size, '12' %><label>12</label></td>
+      <td><%= radio_button_tag :size, '12.5' %><label>12.5</label></td>
+    </tr>
+  </table>
+
+  <div>
+    <span>QUANTITY:</span>
+    <%= select_tag :quantity, options_for_select((1..10).map { |i| [i, i] }, 1) %>
+  </div>
+  <br>
+  <%= submit_tag 'Add to cart', class: "add-to-cart-btn" %>
+<% end %>
+
+
+      <br>
       <%= button_to add_to_cart_path(@product), class: "add-to-cart-btn", method: :post, html: { type: "button" } do %>
       <%= content_tag :i, nil, class: 'fa-solid fa-cart-shopping fa-lg', style: 'color: #ffffff;' %>
         Add to cart
       <% end %>
-    <%# </div> %>
-
   </div>
-
 </div>
 
 
