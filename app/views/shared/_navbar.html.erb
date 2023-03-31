@@ -1,33 +1,23 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary d-flex flex-column">
-  <div class="container-fluid">
-    <strong>
-      <%= link_to "ATHLETE.", root_path, class: "navbar-brand" %>
-    </strong>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Products", products_path, class: "nav-link" %>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <% if current_user %>
-          <%= link_to current_user.email %> |
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-          <%#= link_to current_user.stripe_customer_id %>
-        <% else %>
-          <%= link_to "Log in", new_user_session_path %> |
-          <%= link_to "Register", new_user_registration_path %>
-        <% end %>
-      </span>
+<nav class="navbar-container">
+  <div class="top-navbar">
+      <strong>
+        <%= link_to "ATHLETE.", root_path, class: "navbar-brand" %>
+      </strong>
+    <div class="nav-menu">
+      <%= link_to "HOME", root_path %>
+      <%= link_to "PRODUCTS", products_path %>
     </div>
+    <span class="navbar-text">
+      <% if current_user %>
+        <%= link_to current_user.email %> |
+        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+        <%#= link_to current_user.stripe_customer_id %>
+      <% else %>
+        <%= link_to "Log in", new_user_session_path %> |
+        <%= link_to "Register", new_user_registration_path %>
+      <% end %>
+    </span>
   </div>
-  <hr>
   <div class="center-navbar">
     <div class="nav-search-bar">
       <%= form_tag products_path, method: :get do %>
@@ -72,7 +62,8 @@
                   <div class="cart-product-card-row">
                     <div class="cart-product-card-text">
                       <span><%= cart_item.name %></span>
-                      <span>$<%= cart_item.price/100 -%></span>
+                      <span>USD $<%= cart_item.price/100 -%></span>
+                      <span>Size: <%= cart_item.size %></span>
                     </div>
                     <%= link_to "<i class='fa-regular fa-circle-xmark fa-lg'></i>".html_safe, remove_from_cart_path(cart_item), method: :delete %>
                   </div>
@@ -96,7 +87,6 @@
       </div>
     </div>
   </div>
-  <hr>
 <%# <----------------------BOTTOM NAVBAR---------------------------> %>
   <div class="bottom-navbar">
     <div class="bottom-nav-item">
