@@ -14,66 +14,48 @@
 </div>
 <div class="index-products-container">
   <% @products.each do |product| %>
-  <div class="product-card">
-    <div>
-      <img src="assets/1.jpg" alt="shoe" class="index-product-img">
-      <p><%= product.name %></p>
-      <p>$<%= product.price_cents %></p>
-      <p><%= product.stripe_product_id %></p>
-      <p><%= product.stripe_price_id %></p>
-      <p>Sales count: <%= product.sales_count %></p>
-      <% if @cart.include?(product) %>
-        <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-      <% else %>
-        <%= button_to "Add to cart", add_to_cart_path(product) %>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to 'Show', product %>
-      <%= link_to 'Edit', edit_product_path(product) %>
-      <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </div>
-  </div>
-  <% end %>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stripe Product Id</th>
-      <th>Stripe Price Id</th>
-      <th>Sales count</th>
-      <th></th>
-      <th></th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td>$<%= product.price_cents %></td>
-        <td><%= product.stripe_product_id %></td>
-        <td><%= product.stripe_price_id %></td>
-        <td><%= product.sales_count %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
+      <div class="product-card">
+          <div class="product-card-discount">
+            <%= link_to product_path(product) do %>
+              <div class="product-img-wrapper">
+                <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)>
+                <% if product.discount? %>
+                  <span class="sale-icon">-<%= product.discount %>%</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <div class="product-card-text">
+          <%= link_to product_path(product) do %>
+            <strong><p class="product-name"><%= product.name.upcase %></p></strong>
+          <% end %>
+          <% if product.discount? %>
+            <div class="index-price-discount">
+              <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
+              <strong><p>$<%= (product.price_cents) %></p></strong>
+            </div>
+          <% else %>
+            <strong><p>$<%= product.price_cents %></p></strong>
+          <% end %>
+          <%#= product.stripe_product_id %>
+          <%#= product.stripe_price_id %>
+          <%#= product.sales_count %>
           <% if @cart.include?(product) %>
             <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
           <% else %>
-            <%= button_to "Add to cart", add_to_cart_path(product) %>
+            <%= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
+              <i class="fa-solid fa-cart-plus fa-lg"></i>
+              Add to cart
+            <% end %>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+        </div>
+        <div>
+          <%= link_to 'Edit', edit_product_path(product) %>
+          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+  <% end %>
+</div>
 <br>
 <%= link_to 'New Product', new_product_path %>
 <hr>

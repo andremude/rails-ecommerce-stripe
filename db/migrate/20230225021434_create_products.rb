@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :size
       t.string :type
       t.string :genre
+      t.integer :discount
 
       t.timestamps
     end

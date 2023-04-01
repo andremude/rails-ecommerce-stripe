@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2023_03_25_013753) do
     t.string "size"
     t.string "type"
     t.string "genre"
+    t.integer "discount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sales_count", default: 0, null: false

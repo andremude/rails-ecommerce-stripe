@@ -7,7 +7,12 @@
     <div>
       <h2><%= @product.name %></h2>
       <div class="product-price-genre">
-        <strong><p>$<%= @product.price_cents %></p></strong>
+        <% if @product.discount? %>
+          <del><p>$<%= (@product.price_cents/(100-@product.discount)*100)%></p></del>
+          <strong><p>$<%= (@product.price_cents) %></p></strong>
+        <% else %>
+          <strong><p>$<%= @product.price_cents %></p></strong>
+        <% end %>
         <p><%= @product.genre %></p>
       </div>
       <div>

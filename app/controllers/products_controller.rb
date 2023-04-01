@@ -13,6 +13,8 @@ class ProductsController < ApplicationController
 
     sort_by = params[:sort_by]
     case sort_by
+    when 'discount_product'
+      @products = Product.where.not(discount: nil)
     when 'price_low_to_high'
       @products = @products.order(price: :asc)
     when 'price_high_to_low'
@@ -23,7 +25,6 @@ class ProductsController < ApplicationController
       @products = @products.order(created_at: :desc)
     end
   end
-
 
   def show
     @product = Product.find(params[:id])
@@ -76,6 +77,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :price_cents, :size, :genre, :type)
+    params.require(:product).permit(:name, :price, :price_cents, :size, :genre, :type, :discount)
   end
 end

@@ -10,7 +10,7 @@
   grid-gap: 20px;
   align-items: center;
   justify-items: center;
-  margin: 0 auto;
+  margin: 5px auto;
   width: 100%;
 }
 
@@ -19,14 +19,124 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 250px;
+  height: 390px;
+  box-sizing: border-box;
+}
+
+.product-card:hover {
+  border: 1px solid black;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.index-price-discount {
+  display: flex;
+}
+
+.index-price-discount strong {
+  margin-left: 5px;
+}
+
+.product-img-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.sale-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  font-size: 24px;
+  padding: 4px 8px;
+  border-radius: 0 0 0 20px;
+}
+
+// .sale-icon {
+//   position: absolute;
+//   background: orange;
+//   color: white;
+//   height: 2.5rem;
+//   width: 2.5rem;
+//   text-align: center;
+//   vertical-align: middle;
+//   line-height: 2.5rem;
+//   margin: 45vh 45vw;
+//   transform: rotate(-20deg);
+//   animation: beat 1s ease infinite alternate;
+
+//   &:before,
+//   &:after {
+//     content: "";
+//     position: absolute;
+//     background: inherit;
+//     height: inherit;
+//     width: inherit;
+//     top: 0;
+//     left: 0;
+//     z-index: -1;
+//     transform: rotate(30deg);
+//   }
+
+//   &:after {
+//     transform: rotate(60deg);
+//   }
+// }
+
+@keyframes beat {
+  from {
+    transform: rotate(-20deg) scale(1);
+  }
+
+  to {
+    transform: rotate(-20deg) scale(1.1);
+  }
+}
+
+
+
+
+
+
+.product-card-text {
+  width: 248px;
+  padding: 0px 10px;
+}
+
+.product-card-text a {
+  text-decoration: none;
+  color: black;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+}
+
+.product-card-text .product-price {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+
+.product-card-text p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card-discount {
+  position: relative;
 }
 
 .index-product-img {
-  height: 200px;
-  width: 200px;
+  height: 247px;
+  width: 248px;
 }
 
 .sort-by {
   display: flex;
   align-items: center;
+}
+
+.sort-by span {
+  margin: 0 10px;
 }
