@@ -1,17 +1,29 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    if params[:query].present?
+      sql_query = "\
+      name ILIKE :query\
+      OR genre LIKE :query\
+      "
+      @products = Product.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @products = Product.all
+    end
+
     sort_by = params[:sort_by]
     case sort_by
     when 'price_low_to_high'
-      @products = Product.order(price: :asc)
+      @products = @products.order(price: :asc)
     when 'price_high_to_low'
-      @products = Product.order(price: :desc)
+      @products = @products.order(price: :desc)
+    when 'newest_arrivals'
+      @products = Product.order(created_at: :desc).limit(3)
     else # Newest by default
-      @products = Product.order(created_at: :desc)
+      @products = @products.order(created_at: :desc)
     end
   end
+
 
   def show
     @product = Product.find(params[:id])
