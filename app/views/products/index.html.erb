@@ -1,5 +1,6 @@
 <div class="products-top-section">
   <h1>Products</h1>
+  <%= link_to 'New Product', new_product_path %>
   <div class="sort-by">
     <span>Sort by:</span>
     <%= form_tag products_path, method: :get do %>
@@ -49,16 +50,10 @@
             <% end %>
           <% end %>
         </div>
-        <div>
-          <%= link_to 'Edit', edit_product_path(product) %>
-          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </div>
       </div>
   <% end %>
 </div>
 <br>
-<%= link_to 'New Product', new_product_path %>
-<hr>
 <% if params[:session_id].present? %>
   <% @session = Stripe::Checkout::Session.retrieve(params[:session_id]) %>
   <%= @session.payment_intent %>
