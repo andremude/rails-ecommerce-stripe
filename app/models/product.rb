@@ -6,7 +6,6 @@ class Product < ApplicationRecord
     name
   end
 
-
   def to_builder
     Jbuilder.new do |product|
       product.price stripe_price_id
@@ -25,5 +24,4 @@ class Product < ApplicationRecord
     price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: self.price, currency: "usd" )
     update(stripe_price_id: price.id)
   end
-
 end

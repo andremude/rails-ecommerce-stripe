@@ -147,10 +147,9 @@
 
 
 
-/* Hidden by default */
+
 .modal {
   display: none;
-  /* Center the modal */
   position: fixed;
   z-index: 1;
   left: 0;
@@ -159,21 +158,20 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0.9  ;
+  opacity: 0.9 ;
 }
 
-/* Modal Content/Box */
-.modal form {
-  // background-color: #fefefe;
+.filter-form {
   background-color: black;
   color: white;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  height: 500px;
 }
 
-.filter-form {
+.filter-wrapper {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
@@ -190,15 +188,14 @@
   font-size: 1.1em;
 }
 
-/* Close button */
 #applyFiltersBtn {
   display: block;
   margin: auto;
   padding: 5px 15px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: white;
   border: none;
   cursor: pointer;
+  font-family: 'Oswald', sans-serif;
 }
 
 

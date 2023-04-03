@@ -11,18 +11,20 @@ class ProductsController < ApplicationController
       @products = Product.all
     end
 
-    sort_by = params[:sort_by]
-    case sort_by
-    when 'discount_product'
-      @products = Product.where.not(discount: nil)
-    when 'price_low_to_high'
-      @products = @products.order(price: :asc)
-    when 'price_high_to_low'
-      @products = @products.order(price: :desc)
-    when 'newest_arrivals'
-      @products = Product.order(created_at: :desc).limit(3)
-    else # Newest by default
-      @products = @products.order(created_at: :desc)
+    if params[:sort_by]. present?
+      sort_by = params[:sort_by]
+      case sort_by
+      when 'discount_product'
+        @products = Product.where.not(discount: nil)
+      when 'price_low_to_high'
+        @products = @products.order(price: :asc)
+      when 'price_high_to_low'
+        @products = @products.order(price: :desc)
+      when 'newest_arrivals'
+        @products = Product.order(created_at: :desc).limit(3)
+      else # Newest by default
+        @products = @products.order(created_at: :desc)
+      end
     end
   end
 

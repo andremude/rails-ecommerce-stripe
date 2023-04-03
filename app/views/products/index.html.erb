@@ -1,133 +1,129 @@
-<div class="products-top-section">
-  <h1>Products</h1>
+<div>
+  <div class="products-top-section">
+    <h1>Products</h1>
 
-<button id="filter-btn">Filters
-  <img src="assets/filter.png" alt="" width="12">
-</button>
+    <button id="filter-btn">Filters
+      <img src="assets/filter.png" alt="" width="12">
+    </button>
 
-<div id="filter-modal" class="modal">
-  <form>
-  <div class="filter-form">
-    <%# <button id="close-btn"> %>
-    <i class="fa-regular fa-circle-xmark fa-xl" id="close-btn" style="color: #ffffff;"></i>
-    <%# </button> %>
-    <%#= link_to root_path, id: "close-btn" do %>
-      <%# <i class="fa-regular fa-circle-xmark fa-xl" style="color: #ffffff;"></i> %>
-    <%# end %>
-    <div class="filter-items">
-      <span class="filter-title">Gender</span><br><br>
-      <input type="checkbox" name="men" value="Men"> MEN<br>
-      <input type="checkbox" name="women" value="Women"> WOMEN<br>
-      <input type="checkbox" name="kids" value="Kids"> KIDS<br>
-    </div>
-    <div class="filter-items">
-      <span class="filter-title">Brand</span><br><br>
-      <%# CHANGE THIS WHEN BRANDS IS CREATED (:NAME FOR :BRAND)%>
-      <% unique_brands = Product.distinct.pluck(:name) %>
-      <% unique_brands.each do |name| %>
-        <input type="checkbox" name="name" value="name"> <%= name.upcase %><br>
-      <% end %>
-    </div>
-    <div class="filter-items">
-      <span class="filter-title">Type</span><br><br>
-      <% unique_types = Product.distinct.pluck(:type) %>
-      <% unique_types.each do |type| %>
-        <input type="checkbox" name="types" value="Type"> <%= type %><br>
-      <% end %>
-    </div>
-    <div class="filter-items">
-      <span class="filter-title">Sizes</span><br><br>
-      <% unique_sizes = Product.distinct.pluck(:size) %>
-      <% unique_sizes.each do |size| %>
-        <input type="checkbox" name="sizes" value="Size"> <%= size %><br>
-      <% end %>
-    </div>
-  </div>
-
-    <button id="applyFiltersBtn" type="submit">Apply Filters</button>
-  </form>
-</div>
-
-<script>
-  const filterBtn = document.getElementById("filter-btn");
-  const filterModal = document.getElementById("filter-modal");
-  const closeBtn = document.getElementById("close-btn");
-
-  filterBtn.addEventListener("click", () => {
-    filterModal.style.display = "block";
-  });
-
-  closeBtn.addEventListener("click", () => {
-    filterModal.style.display = "none";
-  });
-</script>
-
-  <%= link_to 'New Product', new_product_path %>
-  <div class="sort-by">
-    <span>Sort by:</span>
-    <%= form_tag products_path, method: :get do %>
-      <%= select_tag :sort_by, options_for_select([
-        ['Price: Low to High', 'price_low_to_high'],
-        ['Price: High to Low', 'price_high_to_low'],
-        ['Newest', 'newest']
-      ], params[:sort_by]) %>
-      <%= submit_tag 'Sort' %>
-    <% end %>
-  </div>
-</div>
-<div class="index-products-container">
-  <% @products.each do |product| %>
-      <div class="product-card">
-          <div class="product-card-discount">
-            <%= link_to product_path(product) do %>
-              <div class="product-img-wrapper">
-                <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)>
-                <% if product.discount? %>
-                  <span class="sale-icon">-<%= product.discount %>%</span>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        <div class="product-card-text">
-          <%= link_to product_path(product) do %>
-            <strong><p class="product-name"><%= product.name.upcase %></p></strong>
+    <div id="filter-modal" class="modal">
+      <form class="filter-form">
+      <div class="filter-wrapper">
+        <i class="fa-regular fa-circle-xmark fa-xl" id="close-btn" style="color: #ffffff;"></i>
+        <div class="filter-items">
+          <span class="filter-title">Gender</span><br><br>
+          <input type="checkbox" name="men" value="Men"> MEN<br>
+          <input type="checkbox" name="women" value="Women"> WOMEN<br>
+          <input type="checkbox" name="kids" value="Kids"> KIDS<br>
+        </div>
+        <div class="filter-items">
+          <span class="filter-title">Brand</span><br><br>
+          <%# CHANGE THIS WHEN BRANDS IS CREATED (:NAME FOR :BRAND)%>
+          <% unique_brands = Product.distinct.pluck(:name) %>
+          <% unique_brands.each do |name| %>
+            <input type="checkbox" name="name" value="name"> <%= name.upcase %><br>
           <% end %>
-          <% if product.discount? %>
-            <div class="index-price-discount">
-              <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
-              <strong><p>$<%= (product.price_cents) %></p></strong>
-            </div>
-          <% else %>
-            <strong><p>$<%= product.price_cents %></p></strong>
+        </div>
+        <div class="filter-items">
+          <span class="filter-title">Type</span><br><br>
+          <% unique_types = Product.distinct.pluck(:type) %>
+          <% unique_types.each do |type| %>
+            <input type="checkbox" name="types" value="Type"> <%= type %><br>
           <% end %>
-          <%#= product.stripe_product_id %>
-          <%#= product.stripe_price_id %>
-          <%#= product.sales_count %>
-          <% if @cart.include?(product) %>
-            <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-          <% else %>
-            <%= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
-              <i class="fa-solid fa-cart-plus fa-lg"></i>
-              Add to cart
-            <% end %>
+        </div>
+        <div class="filter-items">
+          <span class="filter-title">Sizes</span><br><br>
+          <% unique_sizes = Product.distinct.pluck(:size) %>
+          <% unique_sizes.each do |size| %>
+            <input type="checkbox" name="sizes" value="Size"> <%= size %><br>
           <% end %>
         </div>
       </div>
+      <button id="applyFiltersBtn" type="submit">Apply Filters</button>
+      </form>
+    </div>
+
+    <script>
+      const filterBtn = document.getElementById("filter-btn");
+      const filterModal = document.getElementById("filter-modal");
+      const closeBtn = document.getElementById("close-btn");
+
+      filterBtn.addEventListener("click", () => {
+        filterModal.style.display = "block";
+      });
+
+      closeBtn.addEventListener("click", () => {
+        filterModal.style.display = "none";
+      });
+    </script>
+
+    <%= link_to 'New Product', new_product_path %>
+      <div class="sort-by">
+        <span>Sort by:</span>
+        <%= form_tag products_path, method: :get do %>
+          <%= select_tag :sort_by, options_for_select([
+            ['Price: Low to High', 'price_low_to_high'],
+            ['Price: High to Low', 'price_high_to_low'],
+            ['Newest', 'newest']
+          ], params[:sort_by]) %>
+          <%= submit_tag 'Sort' %>
+        <% end %>
+      </div>
+  </div>
+
+  <div class="index-products-container">
+      <% @products.each do |product| %>
+          <div class="product-card">
+              <div class="product-card-discount">
+                <%= link_to product_path(product) do %>
+                  <div class="product-img-wrapper">
+                    <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)>
+                    <% if product.discount? %>
+                      <span class="sale-icon">-<%= product.discount %>%</span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <div class="product-card-text">
+              <%= link_to product_path(product) do %>
+                <strong><p class="product-name"><%= product.name.upcase %></p></strong>
+              <% end %>
+              <% if product.discount? %>
+                <div class="index-price-discount">
+                  <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
+                  <strong><p>$<%= (product.price_cents) %></p></strong>
+                </div>
+              <% else %>
+                <strong><p>$<%= product.price_cents %></p></strong>
+              <% end %>
+              <%#= product.stripe_product_id %>
+              <%#= product.stripe_price_id %>
+              <%#= product.sales_count %>
+              <% if @cart.include?(product) %>
+                <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
+              <% else %>
+                <%= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
+                  <i class="fa-solid fa-cart-plus fa-lg"></i>
+                  Add to cart
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+  </div>
+  <br>
+  <% if params[:session_id].present? %>
+    <% @session = Stripe::Checkout::Session.retrieve(params[:session_id]) %>
+    <%= @session.payment_intent %>
+    <%= Stripe::PaymentIntent.retrieve(@session.payment_intent) %>
+    <hr>
+    <% @session_with_expand = Stripe::Checkout::Session.retrieve({
+      id: params[:session_id],
+      expand: ["payment_intent", "line_items"]
+    }) %>
+    <%= @session_with_expand.line_items.data.each do |line_item| %>
+      <%= line_item.price.id %>
+      <%= line_item.price.product %>
+    <% end %>
   <% end %>
 </div>
-<br>
-<% if params[:session_id].present? %>
-  <% @session = Stripe::Checkout::Session.retrieve(params[:session_id]) %>
-  <%= @session.payment_intent %>
-  <%= Stripe::PaymentIntent.retrieve(@session.payment_intent) %>
-  <hr>
-  <% @session_with_expand = Stripe::Checkout::Session.retrieve({
-    id: params[:session_id],
-    expand: ["payment_intent", "line_items"]
-  }) %>
-
-  <%= @session_with_expand.line_items.data.each do |line_item| %>
-    <%= line_item.price.id %>
-    <%= line_item.price.product %>
-  <% end %>
-<% end %>
