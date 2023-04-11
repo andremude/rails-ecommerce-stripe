@@ -6,6 +6,14 @@
       <img src="assets/filter.png" alt="" width="12">
     </button>
 
+    <%= form_tag products_path, method: :get do %>
+      <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Filter by gender" %>
+      <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma", ""], params[:brand]), prompt: "Filter by brand" %>
+      <%= select_tag :type, options_for_select(["Running", "Urban", "Tennis"], params[:type]), prompt: "Filter by type" %>
+      <%= submit_tag "Filter" %>
+    <% end %>
+
+
     <div id="filter-modal" class="modal">
       <form class="filter-form">
       <div class="filter-wrapper">

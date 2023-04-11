@@ -1,14 +1,23 @@
 class ProductsController < ApplicationController
 
   def index
-    if params[:query].present?
-      sql_query = "\
-      name ILIKE :query\
-      OR genre LIKE :query\
-      "
-      @products = Product.where(sql_query, query: "%#{params[:query]}%")
-    else
-      @products = Product.all
+
+#     def index
+#   @articles = Article.all
+#   @articles = @articles.search(params[:search]) if params[:search].present?
+# end
+
+if params[:query].present?
+  sql_query = "\
+  name ILIKE :query\
+  OR genre LIKE :query\
+  "
+  @products = Product.where(sql_query, query: "%#{params[:query]}%")
+else
+  @products = Product.all
+  @products = @products.where(genre: params[:genre]) if params[:genre].present?
+  @products = @products.where(type: params[:type]) if params[:type].present?
+  @products = @products.where(brand: params[:brand]) if params[:brand].present?
     end
 
     if params[:sort_by]. present?
@@ -79,6 +88,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :price_cents, :size, :genre, :type, :discount)
+    params.require(:product).permit(:name, :brand, :price, :price_cents, :size, :genre, :type, :discount)
   end
 end
