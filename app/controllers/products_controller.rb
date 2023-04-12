@@ -79,6 +79,14 @@ else
     redirect_to products_path
   end
 
+# def add_to_cart
+#   id = params[:id].to_i
+#   size = params[:category]
+#   session[:cart] << { id: id, category: category } unless session[:cart].any? { |item| item[:id] == id && item[:category] == category }
+#   redirect_to products_path
+# end
+
+
   def remove_from_cart
     id = params[:id].to_i
     session[:cart].delete(id)
@@ -88,6 +96,6 @@ else
   private
 
   def product_params
-    params.require(:product).permit(:name, :brand, :price, :price_cents, :size, :genre, :type, :discount)
+    params.require(:product).permit(:name, :brand, :price, :price_cents, :genre, :category, :discount, size: [])
   end
 end
