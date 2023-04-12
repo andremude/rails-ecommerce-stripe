@@ -2,81 +2,27 @@
   <div class="products-top-section">
     <h1>Products</h1>
 
-    <button id="filter-btn">Filters
-      <img src="assets/filter.png" alt="" width="12">
-    </button>
-
     <%= form_tag products_path, method: :get do %>
       <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Filter by gender" %>
       <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma", ""], params[:brand]), prompt: "Filter by brand" %>
-      <%= select_tag :type, options_for_select(["Running", "Urban", "Tennis"], params[:type]), prompt: "Filter by type" %>
+      <%= select_tag :category, options_for_select(["Running", "Urban", "Tennis"], params[:category]), prompt: "Filter by type" %>
       <%= submit_tag "Filter" %>
     <% end %>
 
-
-    <div id="filter-modal" class="modal">
-      <form class="filter-form">
-      <div class="filter-wrapper">
-        <i class="fa-regular fa-circle-xmark fa-xl" id="close-btn" style="color: #ffffff;"></i>
-        <div class="filter-items">
-          <span class="filter-title">Gender</span><br><br>
-          <input type="checkbox" name="men" value="Men"> MEN<br>
-          <input type="checkbox" name="women" value="Women"> WOMEN<br>
-          <input type="checkbox" name="kids" value="Kids"> KIDS<br>
-        </div>
-        <div class="filter-items">
-          <span class="filter-title">Brand</span><br><br>
-          <%# CHANGE THIS WHEN BRANDS IS CREATED (:NAME FOR :BRAND)%>
-          <% unique_brands = Product.distinct.pluck(:name) %>
-          <% unique_brands.each do |name| %>
-            <input type="checkbox" name="name" value="name"> <%= name.upcase %><br>
-          <% end %>
-        </div>
-        <div class="filter-items">
-          <span class="filter-title">Type</span><br><br>
-          <% unique_types = Product.distinct.pluck(:type) %>
-          <% unique_types.each do |type| %>
-            <input type="checkbox" name="types" value="Type"> <%= type %><br>
-          <% end %>
-        </div>
-        <div class="filter-items">
-          <span class="filter-title">Sizes</span><br><br>
-          <% unique_sizes = Product.distinct.pluck(:size) %>
-          <% unique_sizes.each do |size| %>
-            <input type="checkbox" name="sizes" value="Size"> <%= size %><br>
-          <% end %>
-        </div>
-      </div>
-      <button id="applyFiltersBtn" type="submit">Apply Filters</button>
-      </form>
+    <% if current_user.admin? %>
+      <%= link_to 'New Product', new_product_path %>
+    <% end %>
+    <div class="sort-by">
+      <span>Sort by:</span>
+      <%= form_tag products_path, method: :get do %>
+        <%= select_tag :sort_by, options_for_select([
+          ['Price: Low to High', 'price_low_to_high'],
+          ['Price: High to Low', 'price_high_to_low'],
+          ['Newest', 'newest']
+        ], params[:sort_by]) %>
+        <%= submit_tag 'Sort' %>
+      <% end %>
     </div>
-
-    <script>
-      const filterBtn = document.getElementById("filter-btn");
-      const filterModal = document.getElementById("filter-modal");
-      const closeBtn = document.getElementById("close-btn");
-
-      filterBtn.addEventListener("click", () => {
-        filterModal.style.display = "block";
-      });
-
-      closeBtn.addEventListener("click", () => {
-        filterModal.style.display = "none";
-      });
-    </script>
-
-    <%= link_to 'New Product', new_product_path %>
-      <div class="sort-by">
-        <span>Sort by:</span>
-        <%= form_tag products_path, method: :get do %>
-          <%= select_tag :sort_by, options_for_select([
-            ['Price: Low to High', 'price_low_to_high'],
-            ['Price: High to Low', 'price_high_to_low'],
-            ['Newest', 'newest']
-          ], params[:sort_by]) %>
-          <%= submit_tag 'Sort' %>
-        <% end %>
-      </div>
   </div>
 
   <div class="index-products-container">

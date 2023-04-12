@@ -21,6 +21,14 @@
   width: 400px;
 }
 
+.show-product-price {
+  display: flex;
+}
+
+.show-product-price p {
+  margin-right: 4px;
+}
+
 .product-price-genre {
   margin-bottom: 15px;
 }
@@ -52,6 +60,14 @@
   color: white;
 }
 
+.sizes-table input {
+  cursor: pointer;
+}
+
+.sizes-table label {
+  margin-left: 4px;
+}
+
 .add-to-cart-btn {
   background-color: black;
   color: white;
@@ -63,4 +79,8 @@
 
 .add-to-cart-btn:hover {
   background-color: #404040;
+}
+
+.product-controls {
+  margin-left: 5px;
 }
