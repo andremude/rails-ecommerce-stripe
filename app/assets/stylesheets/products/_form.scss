@@ -1,0 +1,24 @@
+.new-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-product-form form {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 30px 20px;
+}
+
+.new-product-form .field {
+  margin-bottom: 15px;
+}
+
+.new-product-form .field label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.new-product-form .actions {
+  text-align: center;
+}
