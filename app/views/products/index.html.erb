@@ -52,7 +52,9 @@
                   <strong><p class="new-price">$<%= (product.price_cents) %></p></strong>
                 </div>
               <% else %>
-                <strong><p>$<%= product.price_cents %></p></strong>
+                <div class="index-card-price">
+                  <strong><p>$<%= product.price_cents %></p></strong>
+                </div>
               <% end %>
               <%#= product.stripe_product_id %>
               <%#= product.stripe_price_id %>
