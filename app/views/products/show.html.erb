@@ -10,7 +10,7 @@
         <div class="show-product-price">
           <% if @product.discount? %>
             <del><p>$<%= (@product.price_cents/(100-@product.discount)*100)%></p></del>
-            <strong><p>$<%= (@product.price_cents) %></p></strong>
+            <strong><p class="new-price">$<%= (@product.price_cents) %></p></strong>
           <% else %>
             <strong><p>$<%= @product.price_cents %></p></strong>
           <% end %>
