@@ -1,1 +1,20 @@
-<h1>Cancel URL</h1>
+<div class="cancel-container">
+  <h2>Payment was not successful.</h2>
+  <h3>You still have the following items in your cart:</h3>
+
+  <div class="cancel-products-container">
+    <% @cart.each do |cart_item| %>
+      <hr>
+      <div class="cart-product-card">
+        <img src="assets/1.jpg" alt="shoe" class="cart-product-img">
+        <div class="cart-product-card-row">
+          <div class="cart-product-card-text">
+            <span><%= cart_item.name %></span>
+            <span>USD $<%= cart_item.price/100 -%></span>
+          </div>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</div>
