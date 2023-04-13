@@ -1,6 +1,5 @@
 <div>
   <div class="products-top-section">
-    <h1>Products</h1>
     <div class= "filter-by">
       <span>Filter by:</span>
       <%= form_tag products_path, method: :get do %>
@@ -10,9 +9,6 @@
         <%= submit_tag "Filter" %>
       <% end %>
     </div>
-    <% if current_user.admin? %>
-      <%= link_to 'New Product', new_product_path %>
-    <% end %>
     <div class="sort-by">
       <span>Sort by:</span>
       <%= form_tag products_path, method: :get do %>
@@ -26,21 +22,28 @@
     </div>
   </div>
 
-  <div class="products-counter">
-    <% if (@products.count < 1) %>
-      <span>No Results</span>
-    <% else %>
-      <span ><%= @products.count %> Product(s)</span>
-    <% end %>
+  <%# <div class="products-counter"> %>
+    <%# if (@products.count < 1) %>
+      <%# <span>
+        No Results
+      </span> %>
+    <%# else %>
+      <%# <span> %>
+        <%#= @products.count %>
+        <%# Product(s)
+      </span> %>
+    <%# end %>
+  <%# </div> %>
+  <div class="pagy-pagination">
+    <%== pagy_nav(@pagy) %>
+    <span>Items per page:
+      <%= link_to_unless_current "2", products_path(items: 2) %>
+      <%= link_to_unless_current "10", products_path(items: 10) %>
+      <%= link_to_unless_current "20", products_path(items: 20) %>
+      <%= link_to_unless_current "100", products_path(items: 100) %>
+    </span>
   </div>
 
-  <%== pagy_nav(@pagy) %>
-  <span>Items per page:
-    <%= link_to_unless_current "2", products_path(items: 2) %>
-    <%= link_to_unless_current "10", products_path(items: 10) %>
-    <%= link_to_unless_current "20", products_path(items: 20) %>
-    <%= link_to_unless_current "100", products_path(items: 100) %>
-  </span>
   <div class="index-products-container">
       <% @products.each do |product| %>
         <div class="product-card">
