@@ -27,7 +27,7 @@
 
   <div class="index-products-container">
       <% @products.each do |product| %>
-          <div class="product-card">
+        <div class="product-card">
               <div class="product-card-discount">
                 <%= link_to product_path(product) do %>
                   <div class="product-img-wrapper">
@@ -40,12 +40,15 @@
               </div>
             <div class="product-card-text">
               <%= link_to product_path(product) do %>
+              <div class="product-name-category">
                 <strong><p class="product-name"><%= product.name.upcase %></p></strong>
+                <span class="product-category"><%= product.category %></span>
+              </div>
               <% end %>
               <% if product.discount? %>
                 <div class="index-price-discount">
                   <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
-                  <strong><p>$<%= (product.price_cents) %></p></strong>
+                  <strong><p class="new-price">$<%= (product.price_cents) %></p></strong>
                 </div>
               <% else %>
                 <strong><p>$<%= product.price_cents %></p></strong>
@@ -53,16 +56,16 @@
               <%#= product.stripe_product_id %>
               <%#= product.stripe_price_id %>
               <%#= product.sales_count %>
-              <% if @cart.include?(product) %>
-                <%= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-              <% else %>
-                <%= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
-                  <i class="fa-solid fa-cart-plus fa-lg"></i>
-                  Add to cart
-                <% end %>
-              <% end %>
+              <%# if @cart.include?(product) %>
+                <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
+              <%# else %>
+                <%#= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
+                  <%# <i class="fa-solid fa-cart-plus fa-lg"></i>
+                  Add to cart %>
+                <%# end %>
+              <%# end %>
             </div>
-          </div>
+        </div>
       <% end %>
   </div>
   <br>
