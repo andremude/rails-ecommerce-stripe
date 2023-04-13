@@ -7,17 +7,17 @@ class ProductsController < ApplicationController
 #   @articles = @articles.search(params[:search]) if params[:search].present?
 # end
 
-if params[:query].present?
-  sql_query = "\
-  name ILIKE :query\
-  OR genre LIKE :query\
-  "
-  @products = Product.where(sql_query, query: "%#{params[:query]}%")
-else
-  @products = Product.all
-  @products = @products.where(genre: params[:genre]) if params[:genre].present?
-  @products = @products.where(type: params[:type]) if params[:type].present?
-  @products = @products.where(brand: params[:brand]) if params[:brand].present?
+    if params[:query].present?
+      sql_query = "\
+      name ILIKE :query\
+      OR genre LIKE :query\
+      "
+      @pagy,@products = pagy(Product.where(sql_query, query: "%#{params[:query]}%"))
+    else
+      @pagy, @products = pagy(Product.all)
+      @pagy, @products = pagy(@products.where(genre: params[:genre])) if params[:genre].present?
+      @pagy, @products = pagy(@products.where(type: params[:type])) if params[:type].present?
+      @pagy, @products = pagy(@products.where(brand: params[:brand])) if params[:brand].present?
     end
 
     if params[:sort_by]. present?
