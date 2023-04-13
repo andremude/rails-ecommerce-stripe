@@ -5,7 +5,7 @@
   margin-bottom: 15px;
 }
 
-.products-top-section {
+.products-top-section h1 {
   letter-spacing: 2px;
   margin-left: 6px;
 }
@@ -156,11 +156,21 @@
   width: 248px;
 }
 
-.sort-by {
+.filter-by {
   display: flex;
   align-items: center;
 }
 
+.filter-by span {
+  margin-right: 10px
+}
+
+.sort-by {
+  display: flex;
+  align-items: center;
+  margin-right: 4px
+}
+
 .sort-by span {
-  margin: 0 10px;
+  margin-right: 10px;
 }

@@ -1,14 +1,15 @@
 <div>
   <div class="products-top-section">
     <h1>Products</h1>
-
-    <%= form_tag products_path, method: :get do %>
-      <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Filter by gender" %>
-      <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma", ""], params[:brand]), prompt: "Filter by brand" %>
-      <%= select_tag :category, options_for_select(["Running", "Urban", "Tennis"], params[:category]), prompt: "Filter by type" %>
-      <%= submit_tag "Filter" %>
-    <% end %>
-
+    <div class= "filter-by">
+      <span>Filter by:</span>
+      <%= form_tag products_path, method: :get do %>
+        <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Gender" %>
+        <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma", ""], params[:brand]), prompt: "Brand" %>
+        <%= select_tag :category, options_for_select(["Running", "Urban", "Tennis"], params[:category]), prompt: "Type" %>
+        <%= submit_tag "Filter" %>
+      <% end %>
+    </div>
     <% if current_user.admin? %>
       <%= link_to 'New Product', new_product_path %>
     <% end %>
