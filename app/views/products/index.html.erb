@@ -26,6 +26,14 @@
     </div>
   </div>
 
+  <div class="products-counter">
+    <% if (@products.count < 1) %>
+      <span>No Results</span>
+    <% else %>
+      <span ><%= @products.count %> Product(s)</span>
+    <% end %>
+  </div>
+
   <div class="index-products-container">
       <% @products.each do |product| %>
         <div class="product-card">
