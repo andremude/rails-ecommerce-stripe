@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
-  validates :name, :price, presence: true
+  validates :name, :price, :category, :genre, :brand, presence: true
   monetize :price, as: :price_cents
+  # serialize :size, Array
 
   def to_s
     name
