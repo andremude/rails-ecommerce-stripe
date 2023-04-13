@@ -63,6 +63,21 @@
 .hero-right-container p {
   color: white;
   font-size: large;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.hero-right-container button {
+  padding: 2px 12px;
+  border-radius: 5px;
+  background-color: #024983;
+  color: white;
+  font-weight: 600;
+  border: 1px solid white;
+}
+
+.hero-right-container button:hover {
+  transform: scale(1.05);
 }
 
 .home-cards-container {
