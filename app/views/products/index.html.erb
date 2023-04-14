@@ -48,7 +48,14 @@
               <div class="product-card-discount">
                 <%= link_to product_path(product) do %>
                   <div class="product-img-wrapper">
-                    <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)>
+                    <% if product.photo.attached? %>
+                      <%= link_to product_path(product) do %>
+                        <%= cl_image_tag product.photo.key, class: "index-product-img" %>
+                       <% end %>
+                    <% else %>
+                      <img src="/noimage.png" alt="no-image" class="index-product-img" >
+                    <% end %>
+                    <%# <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)> %>
                     <% if product.discount? %>
                       <span class="sale-icon">-<%= product.discount %>%</span>
                     <% end %>
