@@ -1,8 +1,11 @@
 <nav class="navbar-container">
   <div class="top-navbar">
+
+    <div class="navbar-brand-container">
       <strong>
         <%= link_to "ATHLETE.", root_path, class: "navbar-brand" %>
       </strong>
+    </div>
     <div class="nav-menu">
       <%= link_to "HOME", root_path %>
       <%= link_to "PRODUCTS", products_path %>
@@ -34,9 +37,9 @@
 
 <%# <----------------------NEW PRODUCT BTN------------------------> %>
 
-    <% if current_user.admin? %>
-      <%= link_to 'NEW PRODUCT', new_product_path, class: "new-product-link" %>
-    <% end %>
+    <%# if current_user.admin? %>
+      <%#= link_to 'NEW PRODUCT', new_product_path, class: "new-product-link" %>
+    <%# end %>
 <%# <--------------------------CART-------------------------------> %>
     <div class="cart-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-cart-shopping fa-2xl"></i>
@@ -95,21 +98,28 @@
     </div>
   </div>
 <%# <----------------------BOTTOM NAVBAR---------------------------> %>
-  <div class="bottom-navbar">
-    <div class="bottom-nav-item">
+  <div class="<%= current_user&.admin? ? 'bottom-navbar-admin' : 'bottom-navbar' %>">
+    <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>">
       <a href="/products?sort_by=newest_arrivals&commit=Sort" class="text-reset">NEW ARRIVALS</a>
     </div>
-    <div class="bottom-nav-item">
+    <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>">
       <a href="/products?query=Men&commit=Search" class="text-reset">MEN</a>
     </div>
-    <div class="bottom-nav-item">
+    <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>">
       <a href="/products?query=Women&commit=Search" class="text-reset">WOMEN</a>
     </div>
-    <div class="bottom-nav-item">
+    <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>">
       <a href="/products?query=Kids&commit=Search" class="text-reset">KIDS</a>
     </div>
-    <div class="bottom-nav-item">
+    <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>">
       <a href="/products?sort_by=discount_product&commit=Sort" class="text-reset">SALE</a>
     </div>
+    <% if current_user&.admin? %>
+      <div class="<%= current_user&.admin? ? 'bottom-nav-item-admin' : 'bottom-nav-item' %>", id='newProductItem'>
+        <%= link_to 'NEW PRODUCT', new_product_path, class: "text-reset" %>
+      </div>
+    <% else  %>
+      <div></div>
+    <% end %>
   </div>
 </nav>
