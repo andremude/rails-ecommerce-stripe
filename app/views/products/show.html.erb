@@ -1,6 +1,10 @@
 <div class="show-product-container">
   <div class="show-left-container">
-    <img src="/assets/1.jpg" alt="shoe" class="show-product-img">
+    <% if @product.photo.attached? %>
+      <%= cl_image_tag @product.photo.key, class: "show-product-img", alt: "shoe" %>
+    <% else %>
+      <img src="/noimage.png" alt="no-image" class="show-product-img" >
+    <% end %>
   </div>
 
   <div class="show-right-container">
@@ -17,14 +21,17 @@
         </div>
         <div class="show-genre-category">
           <p><%= @product.genre %>&nbsp; | &nbsp;</p>
-          <%# <p> | </p> %>
           <p><%= @product.category %></p>
         </div>
       </div>
       <div>
         <span>COLORS:</span>
         <br>
-        <img src="/assets/1.jpg" alt="shoe" class="show-product-color-img">
+        <% if @product.photo.attached? %>
+          <%= cl_image_tag @product.photo.key, class: "show-product-color-img", alt: "shoe" %>
+        <% else %>
+          <img src="/noimage.png" alt="no-image" class="show-product-color-img" >
+        <% end %>
       </div>
     </div>
     <br>
@@ -67,9 +74,8 @@
 </div>
 
 <div class="product-controls">
-  <% if current_user.admin? %>
+  <% if current_user&.admin? %>
     <%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' } %> |
     <%= link_to 'Edit', edit_product_path(@product) %> |
   <% end %>
-  <%#= link_to 'Back', products_path %>
 </div>

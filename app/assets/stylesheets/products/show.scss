@@ -1,6 +1,6 @@
 .show-product-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -8,17 +8,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65%;
+  width: 60%;
 }
 
 .show-right-container {
-  width: 35%;
+  width: 40%;
   padding-right: 10px;
 }
 
 .show-product-img {
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
 }
 
 .show-product-price {
@@ -94,10 +94,12 @@
 
   .show-left-container {
     width: 80%;
+    margin: 0 auto;
   }
 
   .show-right-container {
     width: 80%;
     padding-right: 0px;
+    margin: 20px auto;
   }
 }
