@@ -26,7 +26,7 @@
   flex-direction: column;
   position: relative;
   bottom: 60px;
-  right: 180px;
+  right: 150px;
 }
 
 .hero-left-container p {
@@ -128,4 +128,14 @@
 #kidsCard{
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("kids.jpg");
   background-position: 55%;
+}
+
+@media (max-width: 1080px) {
+  .home-hero {
+    flex-direction: column;
+  }
+
+  .home-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
