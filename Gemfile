@@ -27,6 +27,7 @@ gem "stripe"
 gem 'money-rails', '~> 1.7'
 gem 'simple_form'
 gem 'pagy'
+gem "dotenv-rails", groups: [:development, :test]
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
