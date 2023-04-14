@@ -15,7 +15,11 @@
             <strong><p>$<%= @product.price_cents %></p></strong>
           <% end %>
         </div>
-        <p><%= @product.genre %></p>
+        <div class="show-genre-category">
+          <p><%= @product.genre %>&nbsp; | &nbsp;</p>
+          <%# <p> | </p> %>
+          <p><%= @product.category %></p>
+        </div>
       </div>
       <div>
         <span>COLORS:</span>
@@ -48,11 +52,11 @@
           </tr>
         </table>
         <br>
-        <div>
-          <span>QUANTITY:</span>
-          <%= select_tag :quantity, options_for_select((1..10).map { |i| [i, i] }, 1) %>
-        </div>
-        <br>
+        <%# <div> %>
+          <%# <span>QUANTITY:</span> %>
+          <%#= select_tag :quantity, options_for_select((1..10).map { |i| [i, i] }, 1) %>
+        <%# </div> %>
+        <%# <br> %>
         <%= button_to add_to_cart_path(@product), class: "add-to-cart-btn", method: :post, html: { type: "button" } do %>
           <%= content_tag :i, nil, class: 'fa-solid fa-cart-shopping fa-lg', style: 'color: #ffffff;' %>
             Add to cart
@@ -67,5 +71,5 @@
     <%= link_to 'Destroy', @product, method: :delete, data: { confirm: 'Are you sure?' } %> |
     <%= link_to 'Edit', edit_product_path(@product) %> |
   <% end %>
-  <%= link_to 'Back', products_path %>
+  <%#= link_to 'Back', products_path %>
 </div>

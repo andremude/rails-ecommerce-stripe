@@ -29,6 +29,10 @@
   margin-right: 4px;
 }
 
+.show-genre-category {
+  display: flex;
+}
+
 .product-price-genre {
   margin-bottom: 15px;
 }
@@ -52,7 +56,6 @@
   width: 50px;
   border: 1px solid black;
   text-align: center;
-  cursor: pointer;
 }
 
 .sizes-table td:hover {
@@ -72,7 +75,6 @@
   background-color: black;
   color: white;
   padding: 10px 5px;
-  // font-weight: bold;
   width: 100%;
   border: none;
 }
@@ -83,4 +85,19 @@
 
 .product-controls {
   margin-left: 5px;
+}
+
+@media (max-width: 920px) {
+  .show-product-container {
+      flex-direction: column;
+    }
+
+  .show-left-container {
+    width: 80%;
+  }
+
+  .show-right-container {
+    width: 80%;
+    padding-right: 0px;
+  }
 }
