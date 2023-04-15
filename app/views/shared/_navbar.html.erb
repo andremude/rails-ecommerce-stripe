@@ -36,7 +36,6 @@
     </div>
 
 <%# <----------------------NEW PRODUCT BTN------------------------> %>
-
     <%# if current_user.admin? %>
       <%#= link_to 'NEW PRODUCT', new_product_path, class: "new-product-link" %>
     <%# end %>
@@ -67,13 +66,15 @@
               <% @cart.each do |cart_item| %>
                 <hr>
                 <div class="cart-product-card">
-                  <img src="assets/1.jpg" alt="shoe" class="cart-product-img">
+                  <% if cart_item.photo.attached? %>
+                    <%= cl_image_tag cart_item.photo.key, class: "cart-product-img", alt: "shoe" %>
+                  <% else %>
+                    <img src="/noimage.png" alt="no-image" class="cart-product-img" >
+                  <% end %>
                   <div class="cart-product-card-row">
                     <div class="cart-product-card-text">
                       <span><%= cart_item.name %></span>
                       <span>USD $<%= cart_item.price/100 -%></span>
-                      <span>Size: <%= cart_item.size %></span>
-                      <span>Size: <%#= cart_item[:size] %></span>
                     </div>
                     <%= link_to "<i class='fa-regular fa-circle-xmark fa-lg'></i>".html_safe, remove_from_cart_path(cart_item), method: :delete %>
                   </div>
