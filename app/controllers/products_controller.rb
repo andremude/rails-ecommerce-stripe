@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     else
       @pagy, @products = pagy(Product.all)
       @pagy, @products = pagy(@products.where(genre: params[:genre])) if params[:genre].present?
-      @pagy, @products = pagy(@products.where(type: params[:type])) if params[:type].present?
+      @pagy, @products = pagy(@products.where(category: params[:category])) if params[:category].present?
       @pagy, @products = pagy(@products.where(brand: params[:brand])) if params[:brand].present?
     end
 

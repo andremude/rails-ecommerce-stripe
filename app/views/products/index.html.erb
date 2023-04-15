@@ -4,8 +4,8 @@
       <span>Filter by:</span>
       <%= form_tag products_path, method: :get do %>
         <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Gender" %>
-        <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma", ""], params[:brand]), prompt: "Brand" %>
-        <%= select_tag :category, options_for_select(["Running", "Urban", "Tennis"], params[:category]), prompt: "Type" %>
+        <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma"], params[:brand]), prompt: "Brand" %>
+        <%= select_tag :category, options_for_select(["Running", "Urban", "Training", "Football", "Tennis"], params[:category]), prompt: "Type" %>
         <%= submit_tag "Filter" %>
       <% end %>
     </div>
@@ -55,7 +55,6 @@
                     <% else %>
                       <img src="/noimage.png" alt="no-image" class="index-product-img" >
                     <% end %>
-                    <%# <img src="assets/1.jpg" alt="shoe" class="index-product-img" link_to product_path(product)> %>
                     <% if product.discount? %>
                       <span class="sale-icon">-<%= product.discount %>%</span>
                     <% end %>
