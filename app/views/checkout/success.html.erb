@@ -1,18 +1,16 @@
-<h1>Success URL</h1>
+<div class="success-container">
+  <h2>Order Confirmation</h2>
+  <br>
+  <h3>Your order for the following products has been confirmed:</h3>
+
   <% @session_with_expand.line_items.data.each do |line_item| %>
     <% product = Product.find_by(stripe_product_id: line_item.price.product) %>
     <br>
-    <%= product.name %>
+    <h3><%= product.name %></h3>
   <% end %>
-
-<p>Checkout status: <%= @session_with_expand.payment_status %></p>
-<p>Amount paid: $<%= @session_with_expand.amount_total/100 %></p>
-<p>Currency: <%= @session_with_expand.currency %></p>
-
-<hr>
-
-  <%= @session_with_expand.line_items.data.each do |line_item| %>
-    <%= line_item.price.id %>
-    <%= line_item.price.product %>
-  <% end %>
+  <p>Checkout status: <%= @session_with_expand.payment_status %></p>
+  <p>Amount paid: $<%= @session_with_expand.amount_total/100 %></p>
+  <p>Currency: <%= @session_with_expand.currency %></p>
+  <hr>
+</div>
 <br>
