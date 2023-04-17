@@ -14,7 +14,6 @@
       <% if current_user %>
         <%= link_to current_user.email %> |
         <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        <%#= link_to current_user.stripe_customer_id %>
       <% else %>
         <%= link_to "Log in", new_user_session_path %> |
         <%= link_to "Register", new_user_registration_path %>
@@ -35,10 +34,6 @@
       <% end %>
     </div>
 
-<%# <----------------------NEW PRODUCT BTN------------------------> %>
-    <%# if current_user.admin? %>
-      <%#= link_to 'NEW PRODUCT', new_product_path, class: "new-product-link" %>
-    <%# end %>
 <%# <--------------------------CART-------------------------------> %>
     <div class="cart-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-cart-shopping fa-2xl"></i>
@@ -91,7 +86,11 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <% if @cart.present? %>
                 <% @cart.collect { |item| item.to_builder.attributes! } %>
-                <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."}, class:"btn btn-primary" %>
+                <% if current_user %>
+                  <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..."}, class:"btn btn-primary" %>
+                <% else %>
+                  <%= button_to 'Buy now!', new_user_session_path, onclick: "alert('You need to Log In or Sign Up to proceed')", data: { disable_with: "validating..."}, class:"btn btn-primary" %>
+                <% end %>
               <% end %>
           </div>
         </div>
