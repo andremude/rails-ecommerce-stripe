@@ -1,97 +1,84 @@
 <div>
-  <div class="products-top-section">
-    <div class= "filter-by">
-      <span>Filter by:</span>
-      <%= form_tag products_path, method: :get do %>
+  <%= form_tag products_path, method: :get do %>
+    <div class="products-top-section">
+      <div class="filter-by">
+        <span>Filter by:</span>
         <%= select_tag :genre, options_for_select(["Men", "Women", "Kids"], params[:status]), prompt: "Gender" %>
         <%= select_tag :brand, options_for_select(["Adidas", "Nike", "Puma"], params[:brand]), prompt: "Brand" %>
         <%= select_tag :category, options_for_select(["Running", "Urban", "Training", "Football", "Tennis"], params[:category]), prompt: "Type" %>
-        <%= submit_tag "Filter" %>
-      <% end %>
-    </div>
-    <div class="sort-by">
-      <span>Sort by:</span>
-      <%= form_tag products_path, method: :get do %>
+      </div>
+      <div class="sort-by">
+        <span>Sort by:</span>
         <%= select_tag :sort_by, options_for_select([
           ['Price: Low to High', 'price_low_to_high'],
           ['Price: High to Low', 'price_high_to_low'],
           ['Newest', 'newest']
-        ], params[:sort_by]) %>
-        <%= submit_tag 'Sort' %>
-      <% end %>
+        ], params[:sort_by]), prompt: "Select an option" %>
+      </div>
+      <%= submit_tag "Apply" %>
     </div>
-  </div>
+  <% end %>
 
-  <%# <div class="products-counter"> %>
-    <%# if (@products.count < 1) %>
-      <%# <span>
-        No Results
-      </span> %>
-    <%# else %>
-      <%# <span> %>
-        <%#= @products.count %>
-        <%# Product(s)
-      </span> %>
-    <%# end %>
-  <%# </div> %>
   <div class="pagy-pagination">
     <%== pagy_nav(@pagy) %>
-    <%# <span>Items per page: %>
-      <%#= link_to_unless_current "10", products_path(items: 10) %>
-      <%#= link_to_unless_current "20", products_path(items: 20) %>
-    <%# </span> %>
   </div>
 
+  <% if (@products.count < 1) %>
+    <span class="products-counter">
+      No Results
+    </span>
+  <% end %>
+
   <div class="index-products-container">
-      <% @products.each do |product| %>
+    <% @products.each do |product| %>
         <div class="product-card">
-              <div class="product-card-discount">
-                <%= link_to product_path(product) do %>
-                  <div class="product-img-wrapper">
-                    <% if product.photo.attached? %>
-                      <%= link_to product_path(product) do %>
-                        <%= cl_image_tag product.photo.key, class: "index-product-img" %>
-                       <% end %>
-                    <% else %>
-                      <img src="/noimage.png" alt="no-image" class="index-product-img" >
-                    <% end %>
-                    <% if product.discount? %>
-                      <span class="sale-icon">-<%= product.discount %>%</span>
-                    <% end %>
-                  </div>
+          <div class="product-card-discount">
+            <%= link_to product_path(product) do %>
+              <div class="product-img-wrapper">
+                <% if product.photo.attached? %>
+                  <%= link_to product_path(product) do %>
+                    <%= cl_image_tag product.photo.key, class: "index-product-img" %>
+                   <% end %>
+                <% else %>
+                  <img src="/noimage.png" alt="no-image" class="index-product-img" >
+                <% end %>
+                <% if product.discount? %>
+                  <span class="sale-icon">-<%= product.discount %>%</span>
                 <% end %>
               </div>
-            <div class="product-card-text">
-              <%= link_to product_path(product) do %>
-              <div class="product-name-category">
-                <strong><p class="product-name"><%= product.name.upcase %></p></strong>
-                <span class="product-category"><%= product.category %></span>
-              </div>
-              <% end %>
-              <% if product.discount? %>
-                <div class="index-price-discount">
-                  <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
-                  <strong><p class="new-price">$<%= (product.price_cents) %></p></strong>
-                </div>
-              <% else %>
-                <div class="index-card-price">
-                  <strong><p>$<%= product.price_cents %></p></strong>
-                </div>
-              <% end %>
-              <%#= product.stripe_product_id %>
-              <%#= product.stripe_price_id %>
-              <%#= product.sales_count %>
-              <%# if @cart.include?(product) %>
-                <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-              <%# else %>
-                <%#= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
-                  <%# <i class="fa-solid fa-cart-plus fa-lg"></i>
-                  Add to cart %>
-                <%# end %>
-              <%# end %>
+            <% end %>
+          </div>
+          <div class="product-card-text">
+            <%= link_to product_path(product) do %>
+            <div class="product-name-category">
+              <strong><p class="product-name"><%= product.name.upcase %></p></strong>
+              <span class="product-category"><%= product.category %></span>
             </div>
+            <% end %>
+            <% if product.discount? %>
+              <div class="index-price-discount">
+                <del><p>$<%= (product.price_cents/(100-product.discount)*100)%></p></del>
+                <strong><p class="new-price">$<%= (product.price_cents) %></p></strong>
+              </div>
+            <% else %>
+              <div class="index-card-price">
+                <strong><p>$<%= product.price_cents %></p></strong>
+              </div>
+            <% end %>
+            <%#= product.stripe_product_id %>
+            <%#= product.stripe_price_id %>
+            <%#= product.sales_count %>
+            <%# if @cart.include?(product) %>
+              <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
+            <%# else %>
+              <%#= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
+                <%# <i class="fa-solid fa-cart-plus fa-lg"></i>
+                Add to cart %>
+              <%# end %>
+            <%# end %>
+          </div>
         </div>
-      <% end %>
+    <% end %>
   </div>
   <br>
   <div class="pagy-pagination">

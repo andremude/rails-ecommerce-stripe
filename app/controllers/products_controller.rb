@@ -1,12 +1,6 @@
 class ProductsController < ApplicationController
 
   def index
-
-#     def index
-#   @articles = Article.all
-#   @articles = @articles.search(params[:search]) if params[:search].present?
-# end
-
     if params[:query].present?
       sql_query = "\
       name ILIKE :query\
@@ -30,7 +24,7 @@ class ProductsController < ApplicationController
       when 'price_high_to_low'
         @products = @products.order(price: :desc)
       when 'newest_arrivals'
-        @products = Product.order(created_at: :desc).limit(3)
+        @pagy, @products = pagy(Product.order(created_at: :desc).limit(20))
       else # Newest by default
         @products = @products.order(created_at: :desc)
       end
@@ -78,14 +72,6 @@ class ProductsController < ApplicationController
     session[:cart] << id unless session[:cart].include?(id)
     redirect_to products_path
   end
-
-# def add_to_cart
-#   id = params[:id].to_i
-#   size = params[:category]
-#   session[:cart] << { id: id, category: category } unless session[:cart].any? { |item| item[:id] == id && item[:category] == category }
-#   redirect_to products_path
-# end
-
 
   def remove_from_cart
     id = params[:id].to_i
