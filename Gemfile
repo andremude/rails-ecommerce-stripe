@@ -29,6 +29,7 @@ gem 'simple_form'
 gem 'pagy'
 gem "dotenv-rails", groups: [:development, :test]
 gem "cloudinary"
+gem 'rspec-rails', groups: [:development, :test]
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
