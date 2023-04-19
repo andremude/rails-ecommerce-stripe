@@ -31,6 +31,7 @@ gem "dotenv-rails", groups: [:development, :test]
 gem "cloudinary"
 gem 'rspec-rails', groups: [:development, :test]
 gem 'factory_bot_rails', groups: [:development, :test]
+gem 'rails-controller-testing'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
