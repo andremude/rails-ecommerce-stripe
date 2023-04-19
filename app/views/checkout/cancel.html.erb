@@ -6,7 +6,11 @@
     <% @cart.each do |cart_item| %>
       <hr>
       <div class="cart-product-card">
-        <img src="assets/1.jpg" alt="shoe" class="cart-product-img">
+        <% if cart_item.photo.attached? %>
+          <%= cl_image_tag cart_item.photo.key, class: "cart-product-img", alt: "shoe" %>
+        <% else %>
+          <img src="/noimage.png" alt="no-image" class="cart-product-img" >
+        <% end %>
         <div class="cart-product-card-row">
           <div class="cart-product-card-text">
             <span><%= cart_item.name %></span>
