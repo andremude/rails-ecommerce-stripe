@@ -16,45 +16,38 @@
       <%= form.label :name %>
       <%= form.text_field :name %>
     </div>
-
     <div class="field">
       <%= form.label :brand %>
       <%= form.select :brand, ['Adidas', 'Nike', 'Reebok', 'Puma'], { prompt: "Select a brand" } %>
     </div>
-
     <div class="field">
       <%= form.label :category %>
       <%= form.select :category, ['Running', 'Urban', 'Basket', 'Football', 'Training', 'Tennis'], { prompt: "Select a category" } %>
     </div>
-
     <div class="field">
       <%= form.label :genre %>
       <%= form.select :genre, ['Men', 'Women', 'Kids'], { prompt: "Select a genre" } %>
     </div>
-
     <div class="field">
       <%= form.label :price %>
       <%= form.text_field :price_cents %>
     </div>
-
     <div class="field">
       <%= form.label :discount, "Discount (%)" %>
       <%= form.text_field :discount, default: 0 %>
     </div>
-
     <div class="field">
       <%= form.label :photo %>
       <%= form.file_field :photo %>
     </div>
-
-    <%# <div class="field"> %>
-      <%#= form.label :size, "Sizes", class: "control-label" %>
-      <%#= form.collection_check_boxes :size, [['6.5'], ['7'], ['7.5'], ['8'], ['8.5'], ['9'], ['9.5'], ['10'], ['10.5'], ['11'], ['11.5'], ['12'], ['12.5']], :first, :last do |b| %>
-        <%# <span class="checkbox"> %>
-          <%#= b.check_box(checked: true) + b.label { b.text } %>
-        <%# </span> %>
-      <%# end %>
-    <%# </div> %>
+    <div class="field">
+      <%= form.label :size, "Sizes", class: "control-label" %>
+      <%= form.collection_check_boxes :size, [['6.5'], ['7'], ['7.5'], ['8'], ['8.5'], ['9'], ['9.5'], ['10'], ['10.5'], ['11'], ['11.5'], ['12'], ['12.5']], :first, :last do |b| %>
+        <span class="checkbox">
+          <%= b.check_box(checked: true) + b.label { b.text } %>
+        </span>
+      <% end %>
+    </div>
 
     <div class="actions">
       <%= form.submit %>
