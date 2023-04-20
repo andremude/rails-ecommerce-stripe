@@ -65,17 +65,6 @@
                 <strong><p>$<%= product.price_cents %></p></strong>
               </div>
             <% end %>
-            <%#= product.stripe_product_id %>
-            <%#= product.stripe_price_id %>
-            <%#= product.sales_count %>
-            <%# if @cart.include?(product) %>
-              <%#= button_to "Remove from cart", remove_from_cart_path(product), method: :delete %>
-            <%# else %>
-              <%#= button_to add_to_cart_path(product), class: "btn btn-primary" do %>
-                <%# <i class="fa-solid fa-cart-plus fa-lg"></i>
-                Add to cart %>
-              <%# end %>
-            <%# end %>
           </div>
         </div>
     <% end %>
@@ -83,10 +72,6 @@
   <br>
   <div class="pagy-pagination">
     <%== pagy_nav(@pagy) %>
-    <%# <span>Items per page: %>
-      <%#= link_to_unless_current "10", products_path(items: 10) %>
-      <%#= link_to_unless_current "20", products_path(items: 20) %>
-    <%# </span> %>
   </div>
   <br>
   <% if params[:session_id].present? %>
