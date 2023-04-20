@@ -41,6 +41,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    puts @product.size
     if @product.save
       redirect_to @product, notice: "Product was successfully created."
     else
