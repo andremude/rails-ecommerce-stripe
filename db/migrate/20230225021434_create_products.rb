@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :brand
       t.integer :price
-      t.string :size
+      t.string :size, default: [], array: true
       t.string :genre
       t.string :type
       t.integer :discount
