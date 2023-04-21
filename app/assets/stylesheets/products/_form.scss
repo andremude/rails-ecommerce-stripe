@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 400px;
 }
 
 .new-product-form form {
@@ -21,4 +22,8 @@
 
 .new-product-form .actions {
   text-align: center;
+}
+
+.checkbox input {
+  margin-right: 2px;
 }

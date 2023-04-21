@@ -41,7 +41,8 @@
       <%= form.file_field :photo %>
     </div>
     <div class="field">
-      <%= form.label :size, "Sizes", class: "control-label" %>
+      <%= form.label :size, "Sizes" %>
+      <br>
       <%= form.collection_check_boxes :size, [['6.5'], ['7'], ['7.5'], ['8'], ['8.5'], ['9'], ['9.5'], ['10'], ['10.5'], ['11'], ['11.5'], ['12'], ['12.5']], :first, :last do |b| %>
         <span class="checkbox">
           <%= b.check_box(checked: true) + b.label { b.text } %>
