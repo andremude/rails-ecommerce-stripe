@@ -1,6 +1,5 @@
 <nav class="navbar-container">
   <div class="top-navbar">
-
     <div class="navbar-brand-container">
       <strong>
         <%= link_to "ATHLETE.", root_path, class: "navbar-brand" %>
@@ -33,7 +32,6 @@
         </div>
       <% end %>
     </div>
-
 <%# <--------------------------CART-------------------------------> %>
     <div class="cart-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-cart-shopping fa-2xl"></i>
@@ -69,7 +67,7 @@
                   <div class="cart-product-card-row">
                     <div class="cart-product-card-text">
                       <span><%= cart_item.name %></span>
-                      <span>USD $<%= cart_item.price/100 -%></span>
+                      <span>USD $<%= cart_item.price/100 %></span>
                     </div>
                     <%= link_to "<i class='fa-regular fa-circle-xmark fa-lg'></i>".html_safe, remove_from_cart_path(cart_item), method: :delete %>
                   </div>
