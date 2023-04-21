@@ -1,0 +1,23 @@
+.new-password-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-password-container .field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.new-password-container label {
+  margin-right: 4px;
+}
+
+.new-password-container span {
+  margin-bottom: 10px;
+}
+
+.new-password-container .actions {
+  text-align: center;
+}
