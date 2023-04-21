@@ -86,6 +86,16 @@
 
 .sizes-table label {
   margin-left: 4px;
+  cursor: pointer;
+}
+
+.sizes-table td {
+  cursor: pointer;
+}
+
+.sizes-table td.selected {
+  background-color: #02689F;
+  color: white;
 }
 
 .add-to-cart-btn {

@@ -1,5 +1,4 @@
 <div class="show-product-container">
-
   <script>
     function zoom(e){
       var zoomer = e.currentTarget;
@@ -10,7 +9,6 @@
       zoomer.style.backgroundPosition = x + '% ' + y + '%';
     }
   </script>
-
   <div class="show-left-container zoom" onmousemove="zoom(event)" <% if @product.photo.attached? %> style="background-image: url(<%= cl_image_path(@product.photo.key) %>)" <% else %> style="background-image: url(/noimage.png)" <% end %>>
     <% if @product.photo.attached? %>
       <%= cl_image_tag @product.photo.key, class: "show-product-img", alt: "shoe" %>
@@ -18,7 +16,6 @@
       <img src="/noimage.png" alt="no-image" class="show-product-img" >
     <% end %>
   </div>
-
   <div class="show-right-container">
     <div>
       <h2><%= @product.name %></h2>
@@ -48,39 +45,51 @@
     </div>
     <br>
     <%= form_tag add_to_cart_path(@product, size: params[:size]), method: :post do %>
-        <span>SELECT A SIZE:</span>
-        <table class="sizes-table">
-          <tr>
-            <td><%= radio_button_tag :size, '6.5' %><label>6.5</label></td>
-            <td><%= radio_button_tag :size, '7' %><label>7</label></td>
-            <td><%= radio_button_tag :size, '7.5' %><label>7.5</label></td>
-            <td><%= radio_button_tag :size, '8' %><label>8</label></td>
-            <td><%= radio_button_tag :size, '8.5' %><label>8.5</label></td>
-          </tr>
-          <tr>
-            <td><%= radio_button_tag :size, '9' %><label>9</label></td>
-            <td><%= radio_button_tag :size, '9.5' %><label>9.5</label></td>
-            <td><%= radio_button_tag :size, '10' %><label>10</label></td>
-            <td><%= radio_button_tag :size, '10.5' %><label>10.5</label></td>
-            <td><%= radio_button_tag :size, '11' %><label>11</label></td>
-          </tr>
-          <tr>
-            <td><%= radio_button_tag :size, '11.5' %><label>11.5</label></td>
-            <td><%= radio_button_tag :size, '12' %><label>12</label></td>
-            <td><%= radio_button_tag :size, '12.5' %><label>12.5</label></td>
-          </tr>
-        </table>
-        <br>
-        <%# <div> %>
-          <%# <span>QUANTITY:</span> %>
-          <%#= select_tag :quantity, options_for_select((1..10).map { |i| [i, i] }, 1) %>
-        <%# </div> %>
-        <%# <br> %>
-        <%= button_to add_to_cart_path(@product), class: "add-to-cart-btn", method: :post, html: { type: "button" } do %>
-          <%= content_tag :i, nil, class: 'fa-solid fa-cart-shopping fa-lg', style: 'color: #ffffff;' %>
-            Add to cart
-        <% end %>
+      <span>SELECT A SIZE:</span>
+      <br>
+      <table class="sizes-table">
+        <tr>
+          <td onclick="updateSelectedSize('6.5')"><label>6.5</label></td>
+          <td onclick="updateSelectedSize('7')"><label>7</label></td>
+          <td onclick="updateSelectedSize('7.5')"><label>7.5</label></td>
+          <td onclick="updateSelectedSize('8')"><label>8</label></td>
+          <td onclick="updateSelectedSize('8.5')"><label>8.5</label></td>
+        </tr>
+        <tr>
+          <td onclick="updateSelectedSize('9')"><label>9</label></td>
+          <td onclick="updateSelectedSize('9.5')"><label>9.5</label></td>
+          <td onclick="updateSelectedSize('10')"><label>10</label></td>
+          <td onclick="updateSelectedSize('10.5')"><label>10.5</label></td>
+          <td onclick="updateSelectedSize('11')"><label>11</label></td>
+        </tr>
+        <tr>
+          <td onclick="updateSelectedSize('11.5')"><label>11.5</label></td>
+          <td onclick="updateSelectedSize('12')"><label>12</label></td>
+          <td onclick="updateSelectedSize('12.5')"><label>12.5</label></td>
+        </tr>
+      </table>
+      <%= hidden_field_tag :size, nil, id: "size-field" %>
+      <br>
+      <%= button_to add_to_cart_path(@product, size: nil), class: "add-to-cart-btn", method: :post, html: { type: "button", id: "add-to-cart-btn" } do %>
+        <%= content_tag :i, nil, class: 'fa-solid fa-cart-shopping fa-lg', style: 'color: #ffffff;' %>
+          Add to cart
+      <% end %>
     <% end %>
+    <script>
+      function updateSelectedSize(size) {
+        document.getElementById("size-field").value = size;
+      }
+      const tds = document.querySelectorAll('.sizes-table td');
+
+      tds.forEach(td => {
+        td.addEventListener('click', () => {
+          tds.forEach(td => td.classList.remove('selected'));
+          td.classList.add('selected');
+          const sizeInput = td.querySelector('input[name=size]');
+          sizeInput.checked = true;
+        });
+      });
+    </script>
     <br>
     <div class="product-controls">
       <% if current_user&.admin? %>
