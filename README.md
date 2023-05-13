@@ -68,12 +68,12 @@ Database management:
   run `EDITOR=vim rails credentials:edit` 
   
   Set: 
-   ```
+  
     stripe:
       public: pk_test_XXXXXXX...
       secret: sk_test_XXXXXXX...
       webhook: whsec_XXXXXXX...
-    ```
+    
 <br>
 
 Run server
@@ -86,7 +86,7 @@ Run server
   
   In Gemfile add: 
   
- ```
+```
   group :development, :test do
     gem 'rspec-rails', '~> 6.0.0'
     gem 'rails-controller-testing'
