@@ -13,7 +13,6 @@ Clone repository: `git@github.com:andremude/rails-ecommerce-stripe.git`
 
 Install dependencies: 
 
-  `yarn install`
   `npm install`
  
 <br>
